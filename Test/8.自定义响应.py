@@ -1,5 +1,5 @@
 # 从flask包中导入Flask类
-from flask import Flask
+from flask import Flask, Response, make_response
 # 创建一个Flask对象
 app = Flask(__name__)
 # @app.route:是一个装饰器
@@ -12,23 +12,17 @@ def hello_world():
     return 'hello Flask!'
 
 
-@app.route('/user/<user_id>')
-def success(user_id):
-    print('user_id:', type(user_id))
-    return 'welcome %s' % user_id
-    # return 'hello user{}'.format(user_id)
+@app.route('/return_str')
+def return_str():
+    return Response("你好，少年")
 
 
-@app.route('/users/<int:user_id>')
-def users_info(user_id):
-    print(type(user_id))
-    return f'正在获取 ID {user_id} 的用户信息'
-
-
-@app.route('/users/<int(min=1):user_id>')
-def user_info(user_id):
-    print(type(user_id))
-    return f'hello user {user_id}'
+@app.route('/demo2')
+def demo2():
+    resp = make_response('make response测试')
+    resp.headers['itbaizhan'] = 'Python'
+    resp.status = '404 not found'
+    return resp
 
 
 # 启动这个WEB服务

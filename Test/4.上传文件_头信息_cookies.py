@@ -24,8 +24,17 @@ def upload_file():
     # print(photo.mimetype)         # 内容类型
     # print(photo.mimetype_params)  # 类型参数
 
-    f.save('./{}'.format(f.filename)) # 将图片以本名的方式储存在本地
+    f.save('./{}'.format(f.filename))  # 将图片以本名的方式储存在本地
     return '上传成功!'
+
+
+@app.route('/args')
+def args():
+    cookies = request.cookies.get('uid')
+    headers = request.headers.get('ContentType')
+    url = request.url
+    method = request.method
+    return f'上传成功！！ {cookies} =={headers} == {url} == {method}'
 
 
 # 启动这个WEB服务
